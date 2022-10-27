@@ -1,0 +1,265 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link rel="stylesheet" href="{% static 'company_profile/webfonts' %}">
+    <link rel="stylesheet" href="{% static 'company_profile/css/all.min.css' %}"/>
+    <link rel="stylesheet" href="{% static 'company_profile/css/bootstrap.min.css' %}" />
+    <link rel="stylesheet" href="{% static 'company_profile/css/templatemo-style.css' %}" />
+    <link rel="stylesheet" href="{% static 'company_profile/css/errors.css' %}" />
+    <title>{{ company.name }}</title>
+    
+<!--
+Mini Profile Template
+https://templatemo.com/tm-530-mini-profile
+-->
+  </head>
+  <body>
+    <!-- Welcome Section -->
+    <section id="tmWelcome" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'company_profile/img/mini-profile-bg-01.jpg' %}">
+      <div class="container-fluid tm-brand-container-outer">
+        <div class="row">
+          <div class="col-12">
+            <!-- Logo Area -->
+            <!-- Black transparent bg -->
+            <div class="ml-auto mr-0 tm-bg-black-transparent text-white tm-brand-container-inner">
+              <div class="tm-brand-container text-center">
+                <h1 class="tm-brand-name">{{ company.name }}</h1>
+                <p class="tm-brand-description mb-0">{{ company.description }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="tm-bg-white-transparent tm-welcome-container">
+        <div class="container-fluid">
+          <div class="row h-100">
+            <!-- Welcome Text -->
+            <!-- White transparent bg -->
+            <div class="col-md-7 tm-welcome-left-col">
+              <div class="tm-welcome-left">
+                <h2 class="tm-welcome-title">{{ company.title_bottom_left }}</h2>
+                <p class="pb-0">{{ company.info_bottom_left }}</p>
+              </div>
+            </div>
+            <!-- Brown bg -->
+            <div class="col-md-5">
+              <div class="tm-welcome-right">
+                <i class="fas fa-4x fa-address-card p-3 tm-welcome-icon"></i>
+                <p class="mb-0">{{ company.info_bottom_right }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Welcome section -->
+
+    <!-- Portfolio section -->
+    <section id="tmPortfolio">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="tm-portfolio-item">
+              <div class="tm-portfolio-name text-white tm-bg-green">
+                {{ service1.service_name }}
+              </div>
+              <div class="tm-portfolio-description">
+                <h3 class="tm-text-green">
+                  {{ service1.title }}
+                  <span class="tm-title-small">({{ service1.short_info }})</span>
+                </h3>
+                <p class="mb-0">
+                  {{ service1.description }}
+                </p>
+              </div>
+            </div>
+
+            <div class="tm-portfolio-item">
+              <div class="tm-portfolio-name text-white tm-bg-orange">
+                {{ service2.service_name }}
+              </div>
+              <div class="tm-portfolio-description">
+                <h3 class="tm-text-orange">
+                  {{ service2.title }}
+                  <span class="tm-title-small">({{ service2.short_info }})</span>
+                </h3>
+                <p class="mb-0">
+                  {{ service2.description }}
+                </p>
+              </div>
+            </div>
+
+            <div class="tm-portfolio-item">
+              <div class="tm-portfolio-name text-white tm-bg-blue">
+                {{ service3.service_name }}
+              </div>
+              <div class="tm-portfolio-description">
+                <h3 class="tm-text-blue">
+                  {{ service3.title }}
+                  <span class="tm-title-small">({{ service3.short_info }})</span>
+                </h3>
+                <p class="mb-0">
+                  {{ service3.description }}
+                </p>
+              </div>
+            </div>
+
+            <div class="tm-portfolio-item">
+              <div class="tm-portfolio-name text-white tm-bg-dark-gray">
+                {{ service4.service_name }}
+              </div>
+              <div class="tm-portfolio-description">
+                <h3 class="tm-text-dark-gray">
+                  {{ service4.title }}
+                  <span class="tm-title-small">
+                    ({{ service4.short_info }})
+                  </span>
+                </h3>
+                <p class="mb-0">
+                  {{ service4.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End portfolio section -->
+
+    <!-- Contact section -->
+    <div id="tmContact" class="parallax-window" data-parallax="scroll" data-image-src="{% static 'company_profile/img/mini-profile-bg-02.jpg' %}">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="tm-contact-items-container">
+              <div class="tm-contact-item">
+                <i class="fas fa-5x fa-briefcase tm-contact-item-icon"></i>
+                <p class="mb-0">
+                  {{ advantages.advantage1 }}
+                </p>
+              </div>
+              <div class="tm-contact-item">
+                <i class="fas fa-5x fa-building tm-contact-item-icon"></i>
+                <p class="mb-0">
+                  {{ advantages.advantage2 }}
+                </p>
+              </div>
+
+              <div class="tm-contact-item">
+                <i class="fas fa-5x fa-balance-scale tm-contact-item-icon"></i>
+                <p class="mb-0">
+                  {{ advantages.advantage3 }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-12">
+            <form
+              method="POST"
+              id="tmContactForm"
+              class="tm-bg-white-transparent"
+              action="/#tmContactForm"
+            >
+              {% csrf_token %}
+              {% if messages %}
+                  {% for message in messages %}
+                    {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+                      <p class="checkmark">
+                        <p id="tmCheckmark">✓</p>
+                      </p>
+                      <p id='tmSuccessMessage'>
+                        <b>Ваше сообщение успешно отправлено&#128578;
+                        <br/>
+                            Мы свяжемся с Вами в ближайшее время!
+                        </b>
+                      </p>
+                    {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+                      <p class="checkmark">
+                        <p id="tmCrossmark">x</p>
+                      </p>
+                      <p id='tmFailMessage'>
+                        <b>Ваше сообщение не отправлено</b>
+                      </p>
+                    {% endif %}
+                  {% endfor %}
+              {% endif %}
+
+              {% for field in form %}
+                <div class="form-group {% if field.errors %} errors {% endif %}">
+                  {% if field.field.required %}
+                    {{ field.label|slice:':'|add:'*' }}
+                  {% else %}
+                    {{ field.label|slice:':' }}
+                  {% endif %}
+                  {{ field.errors }}
+                  {{ field }}
+                </div>
+              {% endfor %}
+                <button
+                  type="submit"
+                  class="btn tm-btn-submit rounded-0 text-white"
+                >
+                  Отправить
+                </button>
+            </form>
+          </div>
+        </div>
+        <!-- row -->
+        <div class="row">
+          <footer class="col-12">
+            <p class="text-center tm-copyright-text">
+            Copyright 2020 Mini Profile Page 
+            
+            - Design: Template Mo</p>
+          </footer>
+        </div>
+      </div>
+      <!-- container -->
+    </div>
+    <!-- section -->
+    <script src="{% static 'company_profile/js/jquery.min.js'%}"></script>
+    <script src="{% static 'company_profile/js/parallax.min.js'%}"></script>
+    <script>
+      function detectMsBrowser() {
+        using_ms_browser =
+          navigator.appName == "Microsoft Internet Explorer" ||
+          (navigator.appName == "Netscape" &&
+            navigator.appVersion.indexOf("Edge") > -1) ||
+          (navigator.appName == "Netscape" &&
+            navigator.appVersion.indexOf("Trident") > -1);
+
+        if (using_ms_browser == true) {
+          alert(
+            "Please use Chrome or Firefox for the best browsing experience!"
+          );
+        }
+      }
+      function setBrandMarginTop() {
+        var bottomContainerHeight = $(".tm-welcome-container").height();
+
+        $(".tm-brand-container-outer").css({
+          "margin-top": -bottomContainerHeight + "px"
+        });
+      }
+
+      $(function() {
+        setBrandMarginTop();
+        detectMsBrowser();
+
+        // Handle window resize event
+        $(window).resize(function() {
+          setBrandMarginTop();
+        });
+      });
+    </script>
+  </body>
+</html>
